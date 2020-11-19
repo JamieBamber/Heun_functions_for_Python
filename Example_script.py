@@ -12,7 +12,7 @@ Note that the HeunC branch cut means we can't have real x values less than 0
 def test_HeunC_function(r):
   output = np.zeros(len(r))
   for i in range(0, len(r)):
-      val, dval, numb, err = HC.compute(1-r)
+      val, dval, numb, err = HC.compute(1-r[i])
       output[i] = val.real
   return output
 

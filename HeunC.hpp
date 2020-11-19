@@ -39,6 +39,7 @@
 #include <cmath>
 #include <vector>
 #include <chrono>
+#include "complex_number.hpp"
 #include "Matrix.hpp"
 #include "sgn.hpp"
 

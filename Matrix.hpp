@@ -115,7 +115,7 @@ class Matrix{
 		if (width==height){
                 	data_t trace_ = 0;
 	                for(int j=0; j<height; j++){
-	                        sum_ += array[j][j];
+	                        trace_ += array[j][j];
 	                }
 	                return trace_;
 		} else {

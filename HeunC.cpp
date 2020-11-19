@@ -9,7 +9,7 @@ extern "C" void HeunC_func(double q_real, double q_imag, double alpha_real, doub
 	std::complex<double> delta(delta_real, delta_imag);
 	std::complex<double> epsilon(epsilon_real, epsilon_imag);
 	HeunCspace::HeunC HC;
-	auto output = HC.compute(q, alpha, beta, gamma, delta, epsilon, z);
+	auto output = HC.compute(q, alpha, gamma, delta, epsilon, z);
 	*val_real = real(output.val);
 	*val_imag = imag(output.val);
 	*dval_real = real(output.val);

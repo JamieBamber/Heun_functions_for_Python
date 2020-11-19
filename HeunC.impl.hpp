@@ -219,13 +219,13 @@ inline HeunCvars HeunC::HeunC00gen(HeunCparams& p, double& z)
 		}
     		result.numb = k-1;
 
-		if ( isinf(std::abs(result.val)) || std::isinf(std::abs(result.dval)) || std::isnan(std::abs(result.val)) || std::isnan(std::abs(result.dval)) ) {
+		if ( std::isinf(std::abs(result.val)) || std::isinf(std::abs(result.dval)) || std::isnan(std::abs(result.val)) || std::isnan(std::abs(result.dval)) ) {
 			throw std::runtime_error("HeunC00: failed convergence of recurrence and summation"); 
       		}
     		else {
 			double err1;
 			std::complex<double> val2;
-			if (p.q-p.alpha*z != 0) {
+			if (p.q-p.alpha*z != 0.0) {
         			val2 = ( z*(z-1)*ddval+(p.gamma*(z-1)+p.delta*z+p.epsilon*z*(z-1))*result.dval ) / (p.q-p.alpha*z);
         			err1 = std::abs(result.val-val2);
       			}
@@ -325,7 +325,7 @@ inline HeunCvars HeunC::HeunC00log(HeunCparams& p, double& z) {
 	    	else {
 			std::complex<double> val2, val3;
 	      		double err1, err2;
-			if (p.q-p.alpha*z !=0) {	    
+			if (p.q-p.alpha*z != 0.0) {	    
 	       			val2 = ( z*(z-1)*ddval+(p.gamma*(z-1)+p.delta*z+p.epsilon*z*(z-1))*result.dval ) / (p.q-p.alpha*z);
 	        		val3 = ((dL3*p.epsilon+ddL3)*(z*z)*std::log(z)+(dL3*(p.gamma-p.epsilon+p.delta)-ddL3)*z*std::log(z)-dL3*p.gamma*std::log(z)+
 	          			(p.epsilon*(dL2+dL1)+ddL2+ddL1)*(z*z)+((dL1+dL2)*(p.gamma-p.epsilon+p.delta)+L3*p.epsilon-ddL2-ddL1+2*dL3)*z+
@@ -440,7 +440,7 @@ inline HeunCvars HeunC::HeunCs00(HeunCparams& p, double& z)
       HeunCvars H0 = HeunC00(p1,z);
       result.val= std::pow(z,(1-p.gamma)*H0.val);
       result.dval = (1-p.gamma)*std::pow(z,(-p.gamma)*H0.val) + std::pow(z,(1-p.gamma)*H0.dval);
-      if ( isinf(std::abs(result.val)) || isinf(std::abs(result.dval)) ){
+      if ( std::isinf(std::abs(result.val)) || std::isinf(std::abs(result.dval)) ){
          result.err = INFINITY;
       }
       else {
@@ -484,13 +484,13 @@ inline HeunCvars HeunC::HeunCs00gamma1(HeunCparams& p,double& z)
   result.dval = dL1 + std::log(z) * dL2 + L2/z;
   ddval = ddL1 - L2/(z*z) + 2*dL2/z + std::log(z) * ddL2;
 
-  if ( ( isinf(std::abs(result.val)) || isinf(std::abs(result.dval)) ) || ( isnan(std::abs(result.val)) || isnan(std::abs(result.dval)) ) ){
+  if ( ( std::isinf(std::abs(result.val)) || std::isinf(std::abs(result.dval)) ) || ( std::isnan(std::abs(result.val)) || std::isnan(std::abs(result.dval)) ) ){
      throw std::runtime_error("HeunCs00gamma1: failed convergence of recurrence and summation"); 
   }
   else {
     std::complex<double> val2, val3;
     double err1;
-    if (p.q-p.alpha*z!=0){
+    if (p.q-p.alpha*z!= 0.0){
   
       val2 = ( z*(z-1)*ddval+(z-1+p.delta*z+p.epsilon*z*(z-1))*result.dval) / (p.q-p.alpha*z);
     
@@ -591,13 +591,13 @@ inline HeunCvars HeunC::HeunCfromZ0(HeunCparams& p,double& z,double& Z0,std::com
     
     result.numb = k-1;
 
-    if ( isinf(std::abs(result.val)) || isinf(std::abs(result.dval)) || isnan(std::abs(result.val)) || isnan(std::abs(result.dval)) ) {
+    if ( std::isinf(std::abs(result.val)) || std::isinf(std::abs(result.dval)) || std::isnan(std::abs(result.val)) || std::isnan(std::abs(result.dval)) ) {
       throw std::runtime_error("HeunCfromZ0: failed convergence of recurrence and summation"); 
     }
     else {
       std::complex<double> val2;
       double err1, err2;
-      if (p.q-p.alpha*z != 0) {
+      if (p.q-p.alpha*z != 0.0) {
         val2 = ( z*(z-1)*ddval+(p.gamma*(z-1)+p.delta*z+p.epsilon*z*(z-1))*result.dval ) / (p.q-p.alpha*z);
         err1 = std::abs(result.val-val2);
       }
@@ -992,7 +992,7 @@ inline HeunCvars HeunC::HeunCinfA(HeunCparams& p, double& z)
   result.dval = std::pow((-z),(-p.alpha/p.epsilon)) * (dvm3-p.alpha/p.epsilon*vm3/z);
   result.err = std::abs(std::pow(z,(-p.alpha/p.epsilon))) * result.err;
   
-  if ( isinf(std::abs(result.val)) || isinf(std::abs(result.dval)) || isnan(std::abs(result.val)) || isnan(std::abs(result.dval)) ){
+  if ( std::isinf(std::abs(result.val)) || std::isinf(std::abs(result.dval)) || std::isnan(std::abs(result.val)) || std::isnan(std::abs(result.dval)) ){
     throw std::runtime_error("HeunCinfA: failed convergence of recurrence and summation"); 
   }
   return result;
